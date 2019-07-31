@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import Background from './components/Background-Photo/Background';
+import NEO from './components/NEO/NEO';
 import "./App.css";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
         app! Have fun 🚀!
       </p> */}
       <Background />
+      <NEO />
+      {/* <NEO tableHeadNames={tableHeaders} data={{nearEarth, asteroidName, diameter, hazerdous}} size={dataSize} /> */}
 
     </div>
   );

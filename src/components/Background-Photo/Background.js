@@ -6,7 +6,7 @@ function Background(){
     const [explanation, setExplanation] = useState("");
 
     useEffect(() => {
-        axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+        axios.get('https://api.nasa.gov/planetary/apod?api_key=3ub7zrZEVZpqcjuUzr1Ke0aPi24xCB7DHh4ukDdw')
           .then(res => {
             setBackground(res.data.url);
             setExplanation(res.data.explanation);
