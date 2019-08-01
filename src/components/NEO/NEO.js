@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NEORow from './NEORow';
+import styled from 'styled-components';
 //import NEOTable from './NEOTable';
 
 function NEO(props){
@@ -11,6 +12,7 @@ function NEO(props){
     // const [hazerdous, setHazerdous] = useState([]);
     // const [dataSize, setDataSize] = useState(0);
     const [data, setData] = useState([]);
+    const [rowColor, setRowColor] = useState(true);
 
     useEffect(() => {
     axios.get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2019-07-30&end_date=2019-07-30&api_key=3ub7zrZEVZpqcjuUzr1Ke0aPi24xCB7DHh4ukDdw')
@@ -49,18 +51,29 @@ function NEO(props){
     //     //console.log('Object ', Object.values(props.data))
     //     newRows.push(createRows(i));
     // }
+    const NameStyle = styled.tr`
+        background: grey;
+    `;
+
+    //const Children = styled.div``;
+
+    const AlternateColor = styled.tbody`
+        tr:nth-child(even){
+            background: grey;
+        }
+    `;
 
     return(
         <div>
             <table>
                 <thead>
-                    <tr>
+                    <NameStyle>
                         {tableHeaders.map(name => <th>{name}</th>)}
-                    </tr>
+                    </NameStyle>
                 </thead>
-                <tbody>
-                    {data.map(asteroid => <NEORow asteroid={asteroid} />)}
-                </tbody>
+                <AlternateColor>
+                    {data.map(asteroid => <NEORow asteroid={asteroid} color={NameStyle} />)}
+                </AlternateColor>
             </table>
         </div>
     )
