@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import NEORow from './NEORow';
 import styled from 'styled-components';
+import moment from 'moment';
 //import NEOTable from './NEOTable';
 
-function NEO(props){
+function NEO(){
     const tableHeaders = ['Asteroid Name', 'Missed Earth (Miles)', 'Estimated Diameter (Max)', 'Potentially Hazerdous'];
     // const [nearEarth, setNearEarth] = useState([]);
     // const [asteroidName, setAsteroidName] = useState([]);
@@ -12,12 +13,14 @@ function NEO(props){
     // const [hazerdous, setHazerdous] = useState([]);
     // const [dataSize, setDataSize] = useState(0);
     const [data, setData] = useState([]);
-    const [rowColor, setRowColor] = useState(true);
+    const [date, setDate] = useState('2019-07-30');
+    //console.log(`current date: ${moment().format('YYYY-WW-DD')}`);
 
     useEffect(() => {
-    axios.get('https://api.nasa.gov/neo/rest/v1/feed?start_date=2019-07-30&end_date=2019-07-30&api_key=3ub7zrZEVZpqcjuUzr1Ke0aPi24xCB7DHh4ukDdw')
+    setDate(moment().format('YYYY-MM-DD'))
+    axios.get(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&end_date=${date}&api_key=3ub7zrZEVZpqcjuUzr1Ke0aPi24xCB7DHh4ukDdw`)
         .then(res => {
-            const apiDataArray = res.data.near_earth_objects["2019-07-30"];
+            const apiDataArray = res.data.near_earth_objects[date];
             setData(apiDataArray);
             //setDataSize(apiDataArray.length);
             // apiDataArray.forEach(data => {
@@ -27,10 +30,11 @@ function NEO(props){
             //     setHazerdous(hazerdous.push(data.is_potentially_hazardous_asteroid));
             // })
             //console.log(res.data.near_earth_objects["2019-07-30"])
-            console.log(res);
+            console.log(`current date: ${moment().format('YYYY-MM-DD')}`);
+            console.log(res.data.near_earth_objects[date]);
         })
         .catch(err => console.log('error: ', err));
-    }, []);
+    }, [date]);
 
     // const asteroidData = {
     //     distance: nearEarth,
@@ -51,6 +55,10 @@ function NEO(props){
     //     //console.log('Object ', Object.values(props.data))
     //     newRows.push(createRows(i));
     // }
+    const TableBackground = styled.div`
+        background: rgba(255, 255, 255, 0.5);
+    `;
+
     const NameStyle = styled.tr`
         background: grey;
     `;
@@ -64,7 +72,7 @@ function NEO(props){
     `;
 
     return(
-        <div>
+        <TableBackground>
             <table>
                 <thead>
                     <NameStyle>
@@ -72,10 +80,10 @@ function NEO(props){
                     </NameStyle>
                 </thead>
                 <AlternateColor>
-                    {data.map(asteroid => <NEORow asteroid={asteroid} color={NameStyle} />)}
+                    {data.map(asteroid => <NEORow asteroid={asteroid} />)}
                 </AlternateColor>
             </table>
-        </div>
+        </TableBackground>
     )
 }
 
