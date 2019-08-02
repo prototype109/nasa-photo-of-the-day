@@ -13,11 +13,11 @@ function NEO(){
     // const [hazerdous, setHazerdous] = useState([]);
     // const [dataSize, setDataSize] = useState(0);
     const [data, setData] = useState([]);
-    const [date, setDate] = useState('2019-07-30');
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     //console.log(`current date: ${moment().format('YYYY-WW-DD')}`);
-
+    //setDate(moment().format('YYYY-MM-DD'))
     useEffect(() => {
-    setDate(moment().format('YYYY-MM-DD'))
+    
     axios.get(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${date}&end_date=${date}&api_key=3ub7zrZEVZpqcjuUzr1Ke0aPi24xCB7DHh4ukDdw`)
         .then(res => {
             const apiDataArray = res.data.near_earth_objects[date];
@@ -34,7 +34,7 @@ function NEO(){
             console.log(res.data.near_earth_objects[date]);
         })
         .catch(err => console.log('error: ', err));
-    }, [date]);
+    }, []);
 
     // const asteroidData = {
     //     distance: nearEarth,

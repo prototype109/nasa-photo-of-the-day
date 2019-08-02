@@ -17,6 +17,10 @@ function App() {
     ${props => (props.spaceAround ? `justify-content: space-around` : null)}
   `;
 
+  // const Custom = styled(Container)`
+  //   background: red;
+  // `;
+
   return (
     <div className="App">
       {/* <p>
@@ -31,6 +35,7 @@ function App() {
             <Container textAlign="center"><h2>Space</h2></Container>
             <Container textAlign="center"><h2>Page</h2></Container>
           </FlexDisplay>
+          <Divider/>
           <NEO />
         </FlexDisplay>
       </FlexDisplay>
