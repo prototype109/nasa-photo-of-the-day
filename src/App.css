@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: url('./img/NasaNebul.jpg');
+  height: 100vh;
 }
 
 .App-logo {
